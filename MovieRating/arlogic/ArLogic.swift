@@ -2,6 +2,7 @@ import RealityKit
 import ARKit
 
 struct CustomARViewContainer: ARLogicProtocol {
+    
     let arView = ARView(frame: .zero)
 
     func makeCoordinator() -> Coordinator {
@@ -30,15 +31,22 @@ struct CustomARViewContainer: ARLogicProtocol {
     class Coordinator: NSObject, ARSessionDelegate {
         
         let arView: ARView!
-        let movieRating = MovieRating(title: "I Am Greta",rating: 8.8)
         
+        let movieRating = MovieRating(Title: "I Am Greta", Plot: "", imdbRating: "8.8")
+
         init(arView: ARView) {
             self.arView = arView
         }
         
         func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
-            
             for anchor in anchors {
+                var rating: MovieRating = MovieRating(Title: "", Plot: "", imdbRating: "")
+                TConnectOMDB(movie: "I am Greta", userCompletionHandler: { movie, error in
+                    if let movie = movie {
+                        rating = movie
+                        print(movie)
+                    }
+                })
                 if let imageAnchor = anchor as? ARImageAnchor {
                     
                     let anchorEntity = AnchorEntity(anchor: imageAnchor)
@@ -55,7 +63,7 @@ struct CustomARViewContainer: ARLogicProtocol {
              
                     anchorEntity.addChild(modelEntity)
                     
-                    let text = MeshResource.generateText(movieRating.title,
+                    let text = MeshResource.generateText(rating.Title,
                                           extrusionDepth: 0.02,
                                                          font: .systemFont(ofSize: CGFloat(width*0.05)),
                                           containerFrame: .zero,
@@ -71,8 +79,47 @@ struct CustomARViewContainer: ARLogicProtocol {
                     arView.scene.addAnchor(anchorEntity)
                 }
             }
-    
         }
+        
+        func TConnectOMDB(movie: String, userCompletionHandler: @escaping (MovieRating?, Error?) -> Void) {
+            let urlString = "https://www.omdbapi.com/?t=" + movie + "&apikey=dc9e2a3c"
+            let url = URL(string: urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
+            var request = URLRequest(url: url)
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            let task = URLSession.shared.dataTask(with: url, completionHandler: { data, response, error in
+                if let data = data {
+                    if let videoData = try? JSONDecoder().decode(MovieRating.self, from: data) as MovieRating {
+                        userCompletionHandler(videoData, nil)
+                    } else {
+                        print("Invalid Response")
+                    }
+                } else if let error = error {
+                    print("HTTP Request Failed \(error)")
+                }
+            })
+            task.resume()
+        }
+        
+//        func ConnectOMDB(movie: String) -> MovieRating {
+//            let urlString = "https://www.omdbapi.com/?t=" + movie + "&apikey=dc9e2a3c"
+//            let url = URL(string: urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
+//            var request = URLRequest(url: url)
+//            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+//
+//            let task = URLSession.shared.dataTask(with: url) { (data, response, error) -> Void in
+//                if let data = data {
+//                    if let videoData = try? JSONDecoder().decode(MovieRating.self, from: data) as MovieRating {
+//                        return videoData
+//                    } else {
+//                        print("Invalid Response")
+//                    }
+//                } else if let error = error {
+//                    print("HTTP Request Failed \(error)")
+//                }
+//            }
+//            task.resume()
+//        }
     }
     
 }

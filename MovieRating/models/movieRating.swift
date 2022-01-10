@@ -4,7 +4,8 @@
 //
 //  Created by Kim van der Meulen on 24/12/2021.
 //
-struct MovieRating {
-    var title: String
-    var rating: Double
+struct MovieRating: Decodable {
+    var Title: String
+    var Plot: String
+    var imdbRating: String
 }

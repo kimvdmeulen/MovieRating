@@ -17,6 +17,7 @@
 		CDAB95D227748970001A4727 /* MovieRatingUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAB95D127748970001A4727 /* MovieRatingUITestsLaunchTests.swift */; };
 		CDAB95E527748B1E001A4727 /* ArLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAB95E227748B1E001A4727 /* ArLogic.swift */; };
 		CDAB95E927748B5B001A4727 /* ARLogicProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAB95E827748B5B001A4727 /* ARLogicProtocol.swift */; };
+		CDAB95F4278C7B49001A4727 /* ApiConnectionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAB95F3278C7B49001A4727 /* ApiConnectionProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		CDAB95D127748970001A4727 /* MovieRatingUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRatingUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		CDAB95E227748B1E001A4727 /* ArLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArLogic.swift; sourceTree = "<group>"; };
 		CDAB95E827748B5B001A4727 /* ARLogicProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARLogicProtocol.swift; sourceTree = "<group>"; };
+		CDAB95F3278C7B49001A4727 /* ApiConnectionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiConnectionProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				CDAB95E827748B5B001A4727 /* ARLogicProtocol.swift */,
+				CDAB95F3278C7B49001A4727 /* ApiConnectionProtocol.swift */,
 			);
 			path = protocol;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 				3AD3E9B92775FC360056929E /* movieRating.swift in Sources */,
 				CDAB95E527748B1E001A4727 /* ArLogic.swift in Sources */,
 				CDAB95B52774896E001A4727 /* MovieRatingApp.swift in Sources */,
+				CDAB95F4278C7B49001A4727 /* ApiConnectionProtocol.swift in Sources */,
 				CDAB95E927748B5B001A4727 /* ARLogicProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -455,7 +459,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MovieRating/Preview Content\"";
-				DEVELOPMENT_TEAM = KA96MD7WYP;
+				DEVELOPMENT_TEAM = S7PNS8WB4V;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "MovieRating needs the camera in order to function.";
@@ -487,7 +491,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MovieRating/Preview Content\"";
-				DEVELOPMENT_TEAM = KA96MD7WYP;
+				DEVELOPMENT_TEAM = S7PNS8WB4V;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "MovieRating needs the camera in order to function.";
