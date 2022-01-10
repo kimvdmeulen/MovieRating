@@ -3,7 +3,7 @@ import ARKit
 
 struct CustomARViewContainer: ARLogicProtocol {
     let arView = ARView(frame: .zero)
-    
+
     func makeCoordinator() -> Coordinator {
         Coordinator(arView: arView)
     }
@@ -27,10 +27,11 @@ struct CustomARViewContainer: ARLogicProtocol {
     
     func updateUIView(_ uiView: ARView, context: Context) {}
     
-    //Will handle logic for AR
     class Coordinator: NSObject, ARSessionDelegate {
         
         let arView: ARView!
+        let movieRating = MovieRating(title: "I Am Greta",rating: 8.8)
+        
         
         init(arView: ARView) {
             self.arView = arView
@@ -49,10 +50,22 @@ struct CustomARViewContainer: ARLogicProtocol {
                             
                     modelEntity.transform = Transform(pitch: 0, yaw: 1, roll: 0)
                     
-                    //add model to the anchor
                     anchorEntity.addChild(modelEntity)
                     
-                    //add anchor to the scene
+                    
+                    let text = MeshResource.generateText(movieRating.title,
+                                          extrusionDepth: 0.01,
+                                                    font: .systemFont(ofSize: 0.25),
+                                          containerFrame: .zero,
+                                               alignment: .center,
+                                           lineBreakMode: .byWordWrapping)
+
+                    let shader = UnlitMaterial(color: .white)
+                    let textEntity = ModelEntity(mesh: text, materials: [shader])
+                    textEntity.position.z += 0.6
+                        
+                    anchorEntity.addChild(textEntity)
+                                      
                     arView.scene.addAnchor(anchorEntity)
                 }
             }

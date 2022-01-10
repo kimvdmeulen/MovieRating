@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3AD3E9B92775FC360056929E /* movieRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3E9B82775FC360056929E /* movieRating.swift */; };
 		CDAB95B52774896E001A4727 /* MovieRatingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAB95B42774896E001A4727 /* MovieRatingApp.swift */; };
 		CDAB95B72774896E001A4727 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAB95B62774896E001A4727 /* ContentView.swift */; };
 		CDAB95B92774896F001A4727 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDAB95B82774896F001A4727 /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3AD3E9B82775FC360056929E /* movieRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = movieRating.swift; sourceTree = "<group>"; };
 		CDAB95B12774896E001A4727 /* MovieRating.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieRating.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDAB95B42774896E001A4727 /* MovieRatingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRatingApp.swift; sourceTree = "<group>"; };
 		CDAB95B62774896E001A4727 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -75,6 +77,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3AD3E9B72775FB570056929E /* models */ = {
+			isa = PBXGroup;
+			children = (
+				3AD3E9B82775FC360056929E /* movieRating.swift */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
 		CDAB95A82774896E001A4727 = {
 			isa = PBXGroup;
 			children = (
@@ -98,6 +108,7 @@
 		CDAB95B32774896E001A4727 /* MovieRating */ = {
 			isa = PBXGroup;
 			children = (
+				3AD3E9B72775FB570056929E /* models */,
 				CDAB95E027748B03001A4727 /* arlogic */,
 				CDAB95B42774896E001A4727 /* MovieRatingApp.swift */,
 				CDAB95B62774896E001A4727 /* ContentView.swift */,
@@ -280,6 +291,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDAB95B72774896E001A4727 /* ContentView.swift in Sources */,
+				3AD3E9B92775FC360056929E /* movieRating.swift in Sources */,
 				CDAB95E527748B1E001A4727 /* ArLogic.swift in Sources */,
 				CDAB95B52774896E001A4727 /* MovieRatingApp.swift in Sources */,
 				CDAB95E927748B5B001A4727 /* ARLogicProtocol.swift in Sources */,
