@@ -75,9 +75,20 @@ struct CustomARViewContainer: ARLogicProtocol {
                     textEntity.orientation = simd_quatf(angle: -90,
                                                             axis: [1, 0, 0])
                     textEntity.position.z += 0.01
-               
+                    
+                    
+                    var starMaterial = SimpleMaterial()
+                    starMaterial.baseColor = try! .texture(.load(named: "Star"))
+
+                    let starEntity = ModelEntity(mesh: .generatePlane(width: width*0.001, depth: height*0.001), materials: [starMaterial])
+                        starEntity.generateCollisionShapes(recursive: true)
+                                        
+                                        
+                                        
                     modelEntity.addChild(textEntity)
+                    modelEntity.addChild(starEntity)
                     anchorEntity.addChild(modelEntity)
+                    
                     arView.scene.addAnchor(anchorEntity)
                 }
             }
