@@ -32,8 +32,6 @@ struct CustomARViewContainer: ARLogicProtocol {
         
         let arView: ARView!
         
-        let movieRating = MovieRating(Title: "I Am Greta", Plot: "", imdbRating: "8.8")
-
         init(arView: ARView) {
             self.arView = arView
         }
@@ -58,16 +56,16 @@ struct CustomARViewContainer: ARLogicProtocol {
                     material.baseColor = MaterialColorParameter(_colorLiteralRed: 0.128, green: 0.128, blue: 0.128, alpha: 0.7)
                             
                     
-                    let modelEntity = ModelEntity(mesh: .generateBox(width: width, height: 0.05, depth: height, cornerRadius: 0.015), materials: [material])
+                    let modelEntity = ModelEntity(mesh: .generateBox(width: width, height: 0.01, depth: height, cornerRadius: 0.015), materials: [material])
                     
              
-                    anchorEntity.addChild(modelEntity)
+    
                     
                     let text = MeshResource.generateText(rating.Title,
-                                          extrusionDepth: 0.02,
+                                                         extrusionDepth: 0.0005,
                                                          font: .systemFont(ofSize: CGFloat(width*0.05)),
-                                          containerFrame: .zero,
-                                               alignment: .left,
+                                                         containerFrame:CGRect(x: 0, y: 0, width: Int(width), height: Int(height)),
+                                                         alignment: .left,
                                            lineBreakMode: .byWordWrapping)
 
                     let shader = UnlitMaterial(color: .white)
@@ -75,7 +73,8 @@ struct CustomARViewContainer: ARLogicProtocol {
                     textEntity.orientation = simd_quatf(angle: -90,
                                                             axis: [1, 0, 0])
                
-                    anchorEntity.addChild(textEntity)
+                    modelEntity.addChild(textEntity)
+                    anchorEntity.addChild(modelEntity)
                     arView.scene.addAnchor(anchorEntity)
                 }
             }
