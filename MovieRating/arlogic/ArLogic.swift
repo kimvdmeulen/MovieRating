@@ -40,8 +40,6 @@ struct CustomARViewContainer: ARLogicProtocol {
             for anchor in anchors {
                
                 if let imageAnchor = anchor as? ARImageAnchor {
-                  
-                    
                     var rating: MovieRating = MovieRating(Title: "", Plot: "", imdbRating: "")
                     TConnectOMDB(movie: imageAnchor.referenceImage.name!, userCompletionHandler: { movie, error in
                         if let movie = movie {
@@ -64,7 +62,8 @@ struct CustomARViewContainer: ARLogicProtocol {
                     
                     let text = MeshResource.generateText(rating.Title,
                                                          extrusionDepth: 0.001,
-                                                         font: .systemFont(ofSize: CGFloat(width*0.05)),  containerFrame: .zero,
+                                                         font: .systemFont(ofSize: CGFloat(width*0.12)),
+                                                         containerFrame: .zero,
                                                          alignment: .left,
                                                          lineBreakMode: .byWordWrapping)
                     
@@ -74,7 +73,8 @@ struct CustomARViewContainer: ARLogicProtocol {
                     
                     textEntity.orientation = simd_quatf(angle: -90,
                                                             axis: [1, 0, 0])
-                    textEntity.position.z += 0.01
+                    textEntity.position.z += 0.06
+                    textEntity.position.x += -0.035
                
                     modelEntity.addChild(textEntity)
                     anchorEntity.addChild(modelEntity)
