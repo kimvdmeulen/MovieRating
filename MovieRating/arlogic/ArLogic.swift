@@ -61,16 +61,24 @@ struct CustomARViewContainer: ARLogicProtocol {
                     // Plane material
                     var pMaterial = SimpleMaterial()
                     pMaterial.baseColor = MaterialColorParameter(_colorLiteralRed: 0.128, green: 0.128, blue: 0.128, alpha: 0.9)
-                    let modelEntity = ModelEntity(mesh: .generateBox(width: width, height: 0.01, depth: height, cornerRadius: 0.03), materials: [pMaterial])
+                    let modelEntity = ModelEntity(
+                        mesh: .generateBox(
+                            width: width,
+                            height: 0.01,
+                            depth: height,
+                            cornerRadius: 0.03
+                        ),
+                        materials: [pMaterial]
+                    )
                     modelEntity.position.z += heightOffset
                     
                     // Title properties and positions
                     let title = MeshResource.generateText(rating.Title,
-                                                         extrusionDepth: 0.001,
-                                                         font: .systemFont(ofSize: CGFloat(width*0.08)),
-                                                         containerFrame: .zero,
-                                                         alignment: .left,
-                                                         lineBreakMode: .byWordWrapping
+                         extrusionDepth: 0.001,
+                         font: .systemFont(ofSize: CGFloat(width*0.08)),
+                         containerFrame: .zero,
+                         alignment: .left,
+                         lineBreakMode: .byWordWrapping
                     )
                     let titleEntity = ModelEntity(mesh: title, materials: [shader])
                     titleEntity.orientation = simd_quatf(angle: -90, axis: [1, 0, 0])
@@ -79,33 +87,25 @@ struct CustomARViewContainer: ARLogicProtocol {
                     titleEntity.position.y += 0.009
                     
                     // Rating properties and positions
-                    
-                    // Description properties and positions
-                    let plot = MeshResource.generateText(rating.Plot,
-                                                            extrusionDepth: 0.001,
-                                                            font: .systemFont(ofSize: CGFloat(width*0.03)),
-                                                            containerFrame: .init(x: 0.0,y: 0.0,width: Double(width) ,height: 1.0),
-                                                            alignment: .left,
-                                                            lineBreakMode: .byWordWrapping
-                    )
-                    let plotEntity = ModelEntity(mesh: plot, materials: [shader])
-                    plotEntity.orientation = simd_quatf(angle: -90, axis: [1, 0, 0])
-                    plotEntity.position.z += -0.018
-                    plotEntity.position.x += -widthOffset
-                    plotEntity.position.y += 0.009
-
-                    
-                    textEntity.orientation = simd_quatf(angle: -90,
-                                                            axis: [1, 0, 0])
-                    textEntity.position.z += 0.01
-                    
-                    
                     var starMaterial = SimpleMaterial()
                     starMaterial.baseColor = try! .texture(.load(named: "Star"))
 
                     let starEntity = ModelEntity(mesh: .generatePlane(width: width*0.001, depth: height*0.001), materials: [starMaterial])
                         starEntity.generateCollisionShapes(recursive: true)
-                   
+                    
+                    // Description properties and positions
+                    let plot = MeshResource.generateText(rating.Plot,
+                        extrusionDepth: 0.001,
+                        font: .systemFont(ofSize: CGFloat(width*0.03)),
+                                                         containerFrame: .init(x: 0.0,y: 0.0,width: Double(width/1.1) ,height: 1.0),
+                        alignment: .left,
+                        lineBreakMode: .byWordWrapping
+                    )
+                    let plotEntity = ModelEntity(mesh: plot, materials: [shader])
+                    plotEntity.orientation = simd_quatf(angle: -89.5, axis: [1, 0, 0])
+                    plotEntity.position.z += 0.083
+                    plotEntity.position.x += -widthOffset
+                    plotEntity.position.y += 0.003
 
                     // Adding the elements to the plane
                     modelEntity.addChild(plotEntity)
@@ -114,8 +114,6 @@ struct CustomARViewContainer: ARLogicProtocol {
                     anchorEntity.addChild(modelEntity)
                     
                     arView.scene.addAnchor(anchorEntity)
-                    
-                    
                 }
             }
         }
