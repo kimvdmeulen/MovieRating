@@ -83,8 +83,6 @@ struct CustomARViewContainer: ARLogicProtocol {
                     let starEntity = ModelEntity(mesh: .generatePlane(width: width*0.001, depth: height*0.001), materials: [starMaterial])
                         starEntity.generateCollisionShapes(recursive: true)
                                         
-                                        
-                                        
                     modelEntity.addChild(textEntity)
                     modelEntity.addChild(starEntity)
                     anchorEntity.addChild(modelEntity)
