@@ -87,11 +87,21 @@ struct CustomARViewContainer: ARLogicProtocol {
                     titleEntity.position.y += 0.009
                     
                     // Rating properties and positions
-                    var starMaterial = SimpleMaterial()
-                    starMaterial.baseColor = try! .texture(.load(named: "Star"))
+                    let starRating = Double(rating.imdbRating)!
+                  print(starRating)
+                    for i in 0..<Int(starRating/2) {
+                        print(Float(i))
+                        var starMaterial = SimpleMaterial()
+                        starMaterial.baseColor = try! .texture(.load(named: "Star"))
 
-                    let starEntity = ModelEntity(mesh: .generatePlane(width: width*0.001, depth: height*0.001), materials: [starMaterial])
-                        starEntity.generateCollisionShapes(recursive: true)
+                        let starEntity = ModelEntity(mesh: .generatePlane(width: 0.005, depth: 0.005), materials: [starMaterial])
+                            starEntity.generateCollisionShapes(recursive: true)
+                        starEntity.position.z += -0.028
+                        starEntity.position.x += -0.03+(Float(i)*0.008)
+                        starEntity.position.y += 0.009
+                        modelEntity.addChild(starEntity)
+                    }
+                    
                     
                     // Description properties and positions
                     let plot = MeshResource.generateText(rating.Plot,
@@ -110,7 +120,6 @@ struct CustomARViewContainer: ARLogicProtocol {
                     // Adding the elements to the plane
                     modelEntity.addChild(plotEntity)
                     modelEntity.addChild(titleEntity)
-                    modelEntity.addChild(starEntity)
                     anchorEntity.addChild(modelEntity)
                     
                     arView.scene.addAnchor(anchorEntity)
