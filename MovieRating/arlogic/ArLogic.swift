@@ -38,14 +38,17 @@ struct CustomARViewContainer: ARLogicProtocol {
         
         func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
             for anchor in anchors {
-                var rating: MovieRating = MovieRating(Title: "", Plot: "", imdbRating: "")
-                TConnectOMDB(movie: "I am Greta", userCompletionHandler: { movie, error in
-                    if let movie = movie {
-                        rating = movie
-                        print(movie)
-                    }
-                })
+               
                 if let imageAnchor = anchor as? ARImageAnchor {
+                  
+                    
+                    var rating: MovieRating = MovieRating(Title: "", Plot: "", imdbRating: "")
+                    TConnectOMDB(movie: imageAnchor.referenceImage.name!, userCompletionHandler: { movie, error in
+                        if let movie = movie {
+                            rating = movie
+                            print(movie)
+                        }
+                    })
                     
                     let anchorEntity = AnchorEntity(anchor: imageAnchor)
                     
@@ -56,22 +59,22 @@ struct CustomARViewContainer: ARLogicProtocol {
                     material.baseColor = MaterialColorParameter(_colorLiteralRed: 0.128, green: 0.128, blue: 0.128, alpha: 0.7)
                             
                     
-                    let modelEntity = ModelEntity(mesh: .generateBox(width: width, height: 0.01, depth: height, cornerRadius: 0.015), materials: [material])
+                    let modelEntity = ModelEntity(mesh: .generateBox(width: width, height: 0.01, depth: height, cornerRadius: 0.03), materials: [material])
                     
-             
-    
                     
                     let text = MeshResource.generateText(rating.Title,
-                                                         extrusionDepth: 0.0005,
-                                                         font: .systemFont(ofSize: CGFloat(width*0.05)),
-                                                         containerFrame:CGRect(x: 0, y: 0, width: Int(width), height: Int(height)),
+                                                         extrusionDepth: 0.001,
+                                                         font: .systemFont(ofSize: CGFloat(width*0.05)),  containerFrame: .zero,
                                                          alignment: .left,
-                                           lineBreakMode: .byWordWrapping)
+                                                         lineBreakMode: .byWordWrapping)
+                    
 
                     let shader = UnlitMaterial(color: .white)
                     let textEntity = ModelEntity(mesh: text, materials: [shader])
+                    
                     textEntity.orientation = simd_quatf(angle: -90,
                                                             axis: [1, 0, 0])
+                    textEntity.position.z += 0.01
                
                     modelEntity.addChild(textEntity)
                     anchorEntity.addChild(modelEntity)
