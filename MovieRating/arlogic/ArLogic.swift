@@ -53,7 +53,7 @@ struct CustomARViewContainer: ARLogicProtocol {
                     let width = Float(imageAnchor.referenceImage.physicalSize.width)
                     let height = Float(imageAnchor.referenceImage.physicalSize.height/2)
                     let heightOffset = height/2
-                    let widithOffset = width/2.3
+                    let widthOffset = width/2.3
 
                     // Anchor point where the Plane connects too
                     let anchorEntity = AnchorEntity(anchor: imageAnchor)
@@ -82,15 +82,16 @@ struct CustomARViewContainer: ARLogicProtocol {
                     
                     // Description properties and positions
                     let plot = MeshResource.generateText(rating.Plot,
-                                                          extrusionDepth: 0.001,
-                                                          font: .systemFont(ofSize: CGFloat(width*0.03)),
-                                                          containerFrame: .zero,
-                                                          alignment: .left,
-                                                          lineBreakMode: .byWordWrapping
+                                                            extrusionDepth: 0.001,
+                                                            font: .systemFont(ofSize: CGFloat(width*0.03)),
+                                                            containerFrame: .init(x: 0.0,y: 0.0,width: Double(width) ,height: 1.0),
+                                                            alignment: .left,
+                                                            lineBreakMode: .byWordWrapping
                     )
                     let plotEntity = ModelEntity(mesh: plot, materials: [shader])
+                    plotEntity.orientation = simd_quatf(angle: -90, axis: [1, 0, 0])
                     plotEntity.position.z += -0.018
-                    plotEntity.position.x += -widithOffset
+                    plotEntity.position.x += -widthOffset
                     plotEntity.position.y += 0.009
 
                     
