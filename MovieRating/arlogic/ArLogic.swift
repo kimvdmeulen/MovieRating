@@ -42,12 +42,12 @@ struct CustomARViewContainer: ARLogicProtocol {
                
                 if let imageAnchor = anchor as? ARImageAnchor {
                     var rating: MovieRating = MovieRating(Title: "", Plot: "", imdbRating: "")
-                    TConnectOMDB(movie: imageAnchor.referenceImage.name!, userCompletionHandler: { movie, error in
+                     TConnectOMDB(movie: imageAnchor.referenceImage.name!, userCompletionHandler: { movie, error in
                         if let movie = movie {
                             rating = movie
-                            print(movie)
                         }
                     })
+                    
                     // Shared properties for the elements
                     let shader = UnlitMaterial(color: .white)
                     let width = Float(imageAnchor.referenceImage.physicalSize.width)
@@ -87,21 +87,24 @@ struct CustomARViewContainer: ARLogicProtocol {
                     titleEntity.position.y += 0.009
                     
                     // Rating properties and positions
-                    let starRating = Double(rating.imdbRating)!
-                  print(starRating)
-                    for i in 0..<Int(starRating/2) {
-                        print(Float(i))
-                        var starMaterial = SimpleMaterial()
-                        starMaterial.baseColor = try! .texture(.load(named: "Star"))
+                    do {
+                        let starRating = Double(rating.imdbRating)!
+                        print(starRating)
+                        for i in 0..<Int(starRating/2) {
+                            print(Float(i))
+                            var starMaterial = SimpleMaterial()
+                            starMaterial.baseColor = try! .texture(.load(named: "Star"))
 
-                        let starEntity = ModelEntity(mesh: .generatePlane(width: 0.005, depth: 0.005), materials: [starMaterial])
-                            starEntity.generateCollisionShapes(recursive: true)
-                        starEntity.position.z += -0.028
-                        starEntity.position.x += -0.03+(Float(i)*0.008)
-                        starEntity.position.y += 0.009
-                        modelEntity.addChild(starEntity)
+                            let starEntity = ModelEntity(mesh: .generatePlane(width: 0.005, depth: 0.005), materials: [starMaterial])
+                                starEntity.generateCollisionShapes(recursive: true)
+                            starEntity.position.z += -0.028
+                            starEntity.position.x += -0.03+(Float(i)*0.008)
+                            starEntity.position.y += 0.009
+                            modelEntity.addChild(starEntity)
+                        }
+                    } catch {
+                        print("I tried")
                     }
-                    
                     
                     // Description properties and positions
                     let plot = MeshResource.generateText(rating.Plot,
